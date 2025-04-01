@@ -1,5 +1,8 @@
 {
     "name": "bmt",
+    "start_url": "/?focus=today",
+    "display": "standalone",
+    "theme-color": "#1c1b22",
     "icons": [
         {
             "src": "icon-512.png",

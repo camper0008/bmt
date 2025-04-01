@@ -3,7 +3,7 @@ import { View } from "./view.ts";
 
 function main() {
     const params = new URLSearchParams(location.search);
-    const client = new Client("http://10.0.0.18:8000");
+    const client = new Client("/api");
     View.fromSearchParams(params, client).render();
 }
 
