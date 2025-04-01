@@ -18,4 +18,5 @@ export type Day = {
     checks: number[];
     anxiety: number | null;
     hoursSlept: number | null;
+    comment: string | null;
 };

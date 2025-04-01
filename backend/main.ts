@@ -40,7 +40,13 @@ async function imp({ year, month }: ImportReq, db: Db): Promise<ImportRes> {
     const totalDays = daysInMonth(year, month);
     const days: Day[] = [];
     for (let date = 1; date <= totalDays; ++date) {
-        days.push({ date, anxiety: null, hoursSlept: null, checks: [] });
+        days.push({
+            date,
+            anxiety: null,
+            hoursSlept: null,
+            comment: null,
+            checks: [],
+        });
     }
     return { days };
 }

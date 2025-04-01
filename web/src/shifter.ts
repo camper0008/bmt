@@ -59,7 +59,7 @@ export class Shifter {
 
         const focus = this.createSetting(
             "focus",
-            this.view.focus ? `d. ${this.view.focus}` : "ingen fokus valgt",
+            this.view.focus ? `d. ${this.view.focus}` : "alle dage",
         );
 
         const events: [HTMLButtonElement, ViewShift][] = [

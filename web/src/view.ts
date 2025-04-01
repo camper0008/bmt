@@ -46,6 +46,9 @@ export class View {
             year: this.year,
             month: this.month,
         });
+        return days;
+    }
+    filterDays(days: Day[]): Day[] {
         if (this.focus) {
             return days.filter((day) => day.date === this.focus);
         }
@@ -108,11 +111,13 @@ export class View {
 
         switch (shift) {
             case "month_back":
-                this.date.setMonth(this.date.getMonth() - 1);
+                this.date.setMonth(this.date.getMonth() - 1, 1);
                 break;
-            case "month_forward":
-                this.date.setMonth(this.date.getMonth() + 1);
+            case "month_forward": {
+                const month = this.date.getMonth();
+                this.date.setMonth(month + 1, 1);
                 break;
+            }
             case "focus_back":
                 if (this.focus !== null) {
                     this.date.setDate(this.date.getDate() - 1);
@@ -129,6 +134,15 @@ export class View {
             this.focus = this.date.getDate();
         } else {
             this.focus = null;
+            const now = new Date();
+            const viewingCurrentMonth =
+                this.date.getFullYear() === now.getFullYear() &&
+                this.date.getMonth() === now.getMonth();
+            if (viewingCurrentMonth) {
+                this.date.setDate(now.getDate());
+            } else {
+                this.date.setDate(1);
+            }
         }
         if (
             monthBeforeShift !== this.month ||
