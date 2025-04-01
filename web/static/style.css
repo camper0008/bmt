@@ -1,0 +1,86 @@
+:root {
+    color-scheme: light dark;
+
+    --content-color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --content-color: white;
+    }
+}
+
+body {
+    font-family: monospace;
+
+    color: var(--content-color);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.table {
+    margin: 0 auto;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    display: flex;
+    width: max-content;
+
+    .legend {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        span {
+            flex: 1;
+            border-bottom: 1px solid var(--content-color);
+            white-space: pre;
+
+            &.spacer {
+                border-bottom-color: transparent;
+            }
+            padding: 0.125rem;
+        }
+    }
+    .content {
+        display: flex;
+        gap: 0.5rem;
+
+        .day {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            span {
+                text-align: center;
+                flex: 1;
+                border-bottom: 1px solid var(--content-color);
+                white-space: pre;
+                min-width: 3ch;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                line-height: 0;
+
+                &.i-text {
+                    cursor: text;
+                }
+
+                &.i-check {
+                    cursor: pointer;
+                    font-weight: bold;
+                }
+
+                &.mood {
+                    color: white;
+                }
+
+                &.spacer {
+                    border-bottom-color: transparent;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+}
