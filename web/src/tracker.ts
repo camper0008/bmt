@@ -1,5 +1,7 @@
 import * as html from "./html.ts";
-import { Day } from "../../time_repr/mod.ts";
+import { Day } from "../../shared/time.ts";
+import { Client } from "./client.ts";
+import { View } from "./view.ts";
 
 type Rgb = [number, number, number];
 
@@ -46,21 +48,33 @@ function moodColor(step: number): Rgb {
 }
 
 type TrackerOpts = {
-    month: Day[];
+    view: View;
     container: HTMLElement;
 };
 
 export class Tracker {
-    private month: Day[];
+    private view: View;
+    private days: Day[];
 
-    constructor({ month, container }: TrackerOpts) {
-        this.month = month;
+    private constructor(view: View, days: Day[], container: HTMLElement) {
+        this.days = days;
+        this.view = view;
         this.renderMonth(container);
     }
 
+    static async render(opts: TrackerOpts): Promise<void> {
+        const days = await opts.view.days();
+        new Tracker(opts.view, days, opts.container);
+    }
+
     private renderMonth(container: HTMLElement) {
-        const children = this.month.map((day) => this.renderDay(day));
+        const children = this.days
+            .map((day) => this.renderDay(day));
         container.replaceChildren(...children);
+    }
+
+    private export() {
+        this.view.exportDays(this.days);
     }
 
     private renderDay(day: Day): HTMLElement {
@@ -87,6 +101,7 @@ export class Tracker {
                     day.checks.push(step);
                     element.textContent = "x";
                 }
+                this.export();
             });
             moods.push(element);
         }
@@ -105,6 +120,7 @@ export class Tracker {
             if (score === "") {
                 day.anxiety = null;
                 anxiety.textContent = "";
+                this.export();
                 return;
             }
             const intScore = parseInt(score);
@@ -114,6 +130,7 @@ export class Tracker {
             }
             day.anxiety = intScore;
             anxiety.textContent = day.anxiety.toString();
+            this.export();
         });
         const sleep = html.span("i-text");
         sleep.addEventListener("click", () => {
@@ -125,6 +142,7 @@ export class Tracker {
             if (score === "") {
                 day.hoursSlept = null;
                 sleep.textContent = "";
+                this.export();
                 return;
             }
             const intScore = parseInt(score);
@@ -133,6 +151,7 @@ export class Tracker {
             }
             day.hoursSlept = intScore;
             sleep.textContent = day.hoursSlept.toString();
+            this.export();
         });
 
         container.append(

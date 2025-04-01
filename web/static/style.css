@@ -46,11 +46,13 @@ body {
     .content {
         display: flex;
         gap: 0.5rem;
+        min-width: 4rem;
 
         .day {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            flex: 1;
 
             span {
                 text-align: center;
@@ -82,5 +84,20 @@ body {
                 }
             }
         }
+    }
+}
+
+.shift {
+    margin-top: 1rem;
+    font-size: 2rem;
+    text-align: center;
+
+    div {
+        margin-top: 1rem;
+    }
+
+    button {
+        font-size: inherit;
+        border: none;
     }
 }

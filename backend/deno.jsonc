@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "dev": "deno run --check --watch main.ts"
+  },
+  "fmt": { "indentWidth": 4 }
+}
