@@ -12,6 +12,8 @@
 
 body {
     font-family: monospace;
+    margin: 0;
+    padding: 0.5rem;
 
     color: var(--content-color);
 }
@@ -25,7 +27,8 @@ body {
     padding: 0.5rem;
     gap: 0.5rem;
     display: flex;
-    width: max-content;
+    max-width: max-content;
+    overflow-x: auto;
 
     .legend {
         display: flex;
