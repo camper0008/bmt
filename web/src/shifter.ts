@@ -75,7 +75,7 @@ export class Shifter {
             });
         }
 
-        container.replaceChildren(month.container, focus.container);
+        container.replaceChildren(focus.container, month.container);
     }
 
     static render(opts: ShifterOpts) {
